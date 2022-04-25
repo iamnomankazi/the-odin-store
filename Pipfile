@@ -9,6 +9,7 @@ django-cors-headers = "*"
 djangorestframework = "*"
 pillow = "*"
 braintree = "*"
+pipreqs = "*"
 
 [dev-packages]
 autopep8 = "*"

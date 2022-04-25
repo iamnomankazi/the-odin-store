@@ -28,7 +28,7 @@ export default function Home() {
   }, [])
 
   return (
-    <Base title="The Odin Store" description="Wear what your soul wants">
+    <Base title="The Odin Store" description="Wear What Your Soul Wants">
         <h1>Home</h1>
         <div className="row">
           {products.map((product, index) => {

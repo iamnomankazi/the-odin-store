@@ -114,7 +114,7 @@ const Signup = () =>{
     }
     
   return (
-    <Base title="Sign Up Page" description="Signup for Odin users">
+    <Base title="Sign Up" description="The Odin Store">
         {successMessage()}
         {errorMessage()}
         {signUpForm()}

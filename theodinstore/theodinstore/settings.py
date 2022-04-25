@@ -52,15 +52,15 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'theodinstore.urls'
@@ -129,7 +129,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+# If you want to use Amazon Cloudfront for static files, uncomment the following line
+# STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
+# STATIC_URL = STATIC_HOST + "/static/"
+
 STATIC_URL = 'static/'
+
+# If things doesn't work out, remove the below line. Update: It didn't workout ;(
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -141,6 +148,7 @@ AUTH_USER_MODEL = 'user.CustomUser'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# For security purposes, you should use CORS_ALLOWED_ORIGINS or CORS_ORIGIN_WHITELIST
 CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
@@ -156,5 +164,7 @@ REST_FRAMEWORK = {
     ]
 }
 
-prod_db = dj_database_url.config(conn_max_age=600, ssl_require=True)
-DATABASES['default'].update(prod_db)
+# You can set ss_require=False if you are using a self-signed certificate or simply just don't want to use SSL.
+# Uncomment below line for heroku app.
+# prod_db = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# DATABASES['default'].update(prod_db)
